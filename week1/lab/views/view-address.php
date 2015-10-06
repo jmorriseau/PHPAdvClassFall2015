@@ -2,6 +2,9 @@
     <head>
         <meta charset="UTF-8">
         <title></title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
     </head>
     <body>
         <?php
@@ -9,7 +12,7 @@
         require_once '../functions/util.php';
 
         $addresses = getAllAddresses();
-
+        echo '<h1>Address</h1>';
         if ( count($addresses) > 0 ) {
             echo '<table class="table">';
             echo '<tr>';
