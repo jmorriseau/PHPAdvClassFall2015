@@ -3,8 +3,9 @@
         <meta charset="UTF-8">
         <title></title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="../main.css" type="text/css">
     </head>
     <body>
         <?php
@@ -12,9 +13,12 @@
         require_once '../functions/util.php';
 
         $addresses = getAllAddresses();
-        echo '<h1>Address</h1>';
-        if ( count($addresses) > 0 ) {
-            echo '<table class="table">';
+        echo '<div class="main"><h1>Addresses </h1>
+                    <div class="shift">
+                        <a href="../index.php">Click here</a> to go back to the main page.
+              </div>';
+        if (count($addresses) > 0) {
+            echo '<table class="table table-bordered">';
             echo '<tr>';
             echo '<th>' . 'Full Name' . '</th>';
             echo '<th>' . 'Email' . '</th>';
@@ -35,12 +39,11 @@
                 echo '<td>' . $value["birthday"] . '</td>';
                 echo '</tr>';
             }
-            echo '</table>';
+            echo '</table></div>';
         } else {
             echo 'No results found';
         }
         ?>
-
 
     </body>
 </html>

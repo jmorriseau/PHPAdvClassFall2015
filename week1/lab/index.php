@@ -8,10 +8,14 @@ and open the template in the editor.
     <head>
         <meta charset="UTF-8">
         <title>Addresses</title>
-        <!-- Latest compiled and minified CSS -->        
+        <link rel="stylesheet" href="main.css" type="text/css">
     </head>
-    <body>              
-        <a href="./views/add-address.php">Click here</a> to add an address.
-        <a href="./views/view-address.php">Click here</a> to view all address.
+    <body> 
+        <div class="main">
+            <h1>Welcome to Address Management</h1>
+            <h3>Please make a selection below.</h3>
+            <p><a href="./views/add-address.php">Click here</a> to add an address.</p>
+            <p><a href="./views/view-address.php">Click here</a> to view all address.</p>
+        </div>
     </body>
 </html>
