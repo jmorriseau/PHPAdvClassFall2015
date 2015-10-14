@@ -4,6 +4,8 @@
  * 
  * @return PDO Object
  */  
+
+//connection to the db
 function dbconnect() {
     $config = array(
         'DB_DNS' => 'mysql:host=localhost;port=3306;dbname=PHPAdvClassFall2015',

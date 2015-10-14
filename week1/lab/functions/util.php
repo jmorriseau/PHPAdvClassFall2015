@@ -9,6 +9,7 @@ function isPostRequest() {
     return ( filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST' );
 }
 
+//add address to the db
 function addAddress($fullname, $email, $address, $city, $state, $zip, $birthday) {
     
     $db = dbconnect();
@@ -29,6 +30,7 @@ function addAddress($fullname, $email, $address, $city, $state, $zip, $birthday)
     return false;
 }
 
+//get addresses from the db
 function getAllAddresses() {
     
     $db = dbconnect();

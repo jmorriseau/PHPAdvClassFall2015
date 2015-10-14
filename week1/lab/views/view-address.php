@@ -9,14 +9,17 @@
     </head>
     <body>
         <?php
+        //include necessary files
         require_once '../functions/dbconnect.php';
         require_once '../functions/util.php';
 
+        //get all the address records from the db and set them to an array
         $addresses = getAllAddresses();
         echo '<div class="main"><h1>Addresses </h1>
                     <div class="shift">
                         <a href="../index.php">Click here</a> to go back to the main page.
               </div>';
+        //if there are address records display them in a table
         if (count($addresses) > 0) {
             echo '<table class="table table-bordered">';
             echo '<tr>';

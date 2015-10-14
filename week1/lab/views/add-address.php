@@ -1,10 +1,9 @@
 <?php
-// put your code here
-
+// include necessary files
 require_once '../functions/dbconnect.php';
 require_once '../functions/util.php';
 
-
+//get fields from the post and set them to variables
 $fullname = filter_input(INPUT_POST, 'fullname');
 $email = filter_input(INPUT_POST, 'email');
 $address = filter_input(INPUT_POST, 'address');
@@ -13,6 +12,7 @@ $state = filter_input(INPUT_POST, 'state');
 $zip = filter_input(INPUT_POST, 'zip');
 $birthday = filter_input(INPUT_POST, 'birthday');
 
+//set regex validation
 $zipRegex = '/^[0-9]{5}(?:-[0-9]{4})?$/';
 $nameRegex = '/^[A-Z][-a-zA-Z]+$/';
 $addressRegex = '/^([0-9]+ )?[a-zA-Z ]+$/';
@@ -20,7 +20,7 @@ $cityRegex = '/^[a-zA-Z]+(?:[\s-][a-zA-Z]+)*$/';
 $isValid = true;
 $error = array();
 
-
+//validate the information
 if (isPostRequest()) {
 
     if (empty($fullname)) {
@@ -70,6 +70,7 @@ if (isPostRequest()) {
         }
     }
 
+    //if the data is valid, add the data to the db, output success, clear variables
     if ($isValid) {
         addAddress($fullname, $email, $address, $city, $state, $zip, $birthday);
         echo '<div class="alert alert-success alert-size"><p>Address Added</p></div>';
@@ -84,6 +85,7 @@ if (isPostRequest()) {
 }
 ?>
 
+<!-- form-->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 <!-- Optional theme -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
