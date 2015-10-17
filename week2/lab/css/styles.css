@@ -1,10 +1,31 @@
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
-/* 
-    Created on : Oct 16, 2015, 7:19:16 PM
-    Author     : GFORTI
-*/
-
+.form {
+    border:1px solid navy;
+    border-radius:4px;
+    background-color:#48B5B5;
+    height:150px;
+    width:300px;
+    margin:auto;
+    padding:10px;
+}
+label {
+    color:#FFF;
+    font-size:18px;   
+}
+input[type=text], input[type=password]{
+    float:right;
+    line-height:18px;
+}
+input[type=submit]{
+    margin-top:10px;
+    float:right;
+}
+h1 {
+    text-align:center;
+    margin-top:10%;
+    color:#09094A;
+}
+.bg-danger, .bg-success{
+    width:250px;
+    margin:auto;
+    margin-top:5px;
+}

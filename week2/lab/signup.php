@@ -3,7 +3,12 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title></title>
+        <title>Sign Up</title>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="css/styles.css">
     </head>
     <body>
         <?php
@@ -34,7 +39,7 @@
                 if ( count($errors) <= 0) {
                 
                     if ( $signup->save($email,$password) ) {
-                        $message = 'Signup complete';
+                        $message = 'Signup complete. Please <a href="index.php">Log in</a>.';                        
                     } else {
                         $message = 'Signup failed';
                     }
