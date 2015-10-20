@@ -7,23 +7,21 @@ and open the template in the editor.
 <html>
     <head>
         <meta charset="UTF-8">
-        <title></title>
+        <title>Add a Flash Message/title>
     </head>
     <body>
-        <div class="bg-warning">
-            <?php
-            session_start();  
+        <?php
+        session_start();  
             
             include './models/IMessage.php';
             include './models/Message.php';
             include './models/FlashMessage.php';
-
-            $flashMessage = new FlashMessage();
-
-            $messages = $flashMessage->getAllMessages();
             
-            print_r($messages);
-            ?>
-        </div>
+            $message = new FlashMessage();
+            
+            $message->addMessage('help', 'fix this, please');
+            
+            var_dump($message instanceof IMessage);
+        ?>
     </body>
 </html>

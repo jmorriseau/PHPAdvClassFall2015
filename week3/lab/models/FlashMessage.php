@@ -18,7 +18,7 @@ class FlashMessage extends Message {
     public function __contruct() {
 
         if (!isset($_SESSION['flashmessages'])) {
-            $_SESSION['flashmessages'] = array();
+            $this->setFlashMessages();
         }
         
         $this->messages = $_SESSION['flashmessages'];
@@ -34,11 +34,12 @@ class FlashMessage extends Message {
         $this->setFlashMessages();
     }
     
-    public function getAllMessages() {
+    public function getAllMessages(){
         $messages = $_SESSION['flashmessages'];
-        $this->removeAllMessages();
-        return $messages;
+        $this->removeAllMessages();        
+        return $messages;                
     }
+
     
     public function removeAllMessages() {
         parent::removeAllMessages();

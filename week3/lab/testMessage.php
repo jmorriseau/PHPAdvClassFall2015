@@ -19,13 +19,8 @@
 
         $message->addMessage('test', 'my test message');
 
-        var_dump($message->getAllMessages());
-
         var_dump($message instanceof IMessage);
 
-        var_dump($message->removeMessage('test'));
-
-        var_dump($message->getAllMessages());
         ?>
         </div>
     </body>
