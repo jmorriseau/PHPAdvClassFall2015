@@ -8,3 +8,17 @@ and open the template in the editor.
     Author     : 001305466
 */
 
+.message-box {
+    width:500px;
+    background-color:#ccc;;
+    border:1px solid #000;
+    border-radius:4px;
+    color:#32C9CE;
+    font-size:36px;
+    font-weight:600;
+    padding:10px;
+    height:auto;
+    margin:auto;
+    margin-top:50px;
+}
+

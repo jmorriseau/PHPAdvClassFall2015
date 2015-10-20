@@ -8,9 +8,10 @@
 
         <!-- Optional theme -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        <div class="bg-primary">
+        <div class="bg-primary message-box">
         <?php
         include './models/IMessage.php';
         include './models/Message.php';
