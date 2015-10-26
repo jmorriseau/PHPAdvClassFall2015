@@ -30,6 +30,8 @@ class Login {
         $this->db = $db;
     }
 
+    
+    // verify if the email and return the user ID
     public function verify($email, $password) {
 
         $results = array();

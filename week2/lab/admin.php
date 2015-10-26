@@ -10,7 +10,7 @@ if ($logout == 1) {
 if (!isset($_SESSION['user_id'])) {
     header('Location: index.php');
 } else if (isset($_SESSION['user_id'])) {
-    echo '<a href="?logout=1">Logout</a>';
+    echo '<div class="logout"><a href="?logout=1">Logout</a></div>';
 }
 ?>
 <!DOCTYPE html>
@@ -25,11 +25,9 @@ if (!isset($_SESSION['user_id'])) {
         <link rel="stylesheet" href="css/styles.css">
     </head>
     <body>
-        <p>You are on the admin page<p>
+        <div class="wrapper"><p>You are on the admin page<p></div>
 
-<?php ?>
 
-            <!--<input type="submit" value="Log out" id="logout" class="btn btn-primary" />-->
     </body>
 </html>
 

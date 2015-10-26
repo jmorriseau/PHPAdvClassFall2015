@@ -25,6 +25,7 @@ class Signup {
         $this->db = $db;
     }
 
+    //check if the email exists
     public function emailExists($email) {
                 
         $stmt = $this->getDb()->prepare("SELECT * FROM users WHERE email = :email");
@@ -39,6 +40,7 @@ class Signup {
         return false;       
     }
 
+    //save the email and hashed password
     public function save($email, $password) {
         
         $hash = password_hash($password, PASSWORD_DEFAULT);

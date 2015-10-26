@@ -29,3 +29,20 @@ h1 {
     margin:auto;
     margin-top:5px;
 }
+.wrapper {
+    width: 300px;
+    margin: auto;
+    margin-top: 50px;
+    font-size: 24px;
+}
+.logout a {
+    background: #eee;
+    padding: 10px;
+    font-size: 24px;
+    border-radius: 4px;
+    float: right;
+    margin:25px 25px 0 0;
+}
+.nav {
+    margin-left:50%;
+}

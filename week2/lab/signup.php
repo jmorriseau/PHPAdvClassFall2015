@@ -58,6 +58,6 @@
         <h1>Signup Form</h1>
         
         <?php include './templates/login-form.html.php'; ?>
-        
+        <div class="nav">Click <a href="./index.php">here</a> to login.</div>
     </body>
 </html>

@@ -1,3 +1,4 @@
+<!--default form-->
 <div class="form">  
     <form action="#" method="post">   
         <label>Email:</label> <input type="text" name="email" value="<?php echo $email; ?>" /> <br />
