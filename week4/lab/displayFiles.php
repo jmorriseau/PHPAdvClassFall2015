@@ -7,28 +7,32 @@ and open the template in the editor.
 <html>
     <head>
         <meta charset="UTF-8">
-        <title></title>
+        <title>Display Uploads</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
     </head>
     <body>
         <?php
-        // put your code here
-        
-        //DIRECTORY_SEPARATOR 
-        
         $directory = scandir('./uploads');
+        ?>
 
+        <table class="table"><thead><td> File Name </td><td>File Type</td><td>File Size</td></thead>
+                <?php foreach ($directory as $file) : ?>
+                    <?php if (!is_dir($file)) : ?>
+                        <?php
+                        echo '<tr><td><a href="./uploads/' . $file . '" target="_blank">' . basename($file) .'</a></td>';
+                        $img = getimagesize('./uploads/' . $file);
+                        echo '<td>' . $img['mime'] . '</td>';
+                        $size = filesize('./uploads/' . $file);
+                        echo '<td>' . $size . '</td>';
+                        echo '<td> <button class="btn">Delete</button> </td></tr>'
+                        ?>                      
+                    <?php endif; ?>
+                <?php endforeach; ?>
         
-        ?>
-        
-        
-        <?php foreach( $directory as $file) : ?>
-            <?php if(!is_dir($file)) : ?>
-        <?php echo 'File name ' . basename($file);
-        echo 'File size ' . filesize($directory);
-        
-        ?>
-<!--                <img src="./uploads///<?php echo $file;?>" />-->
-            <?php endif; ?>
-        <?php endforeach; ?>
-    </body>
+        </table>
+
+
+</body>
 </html>
