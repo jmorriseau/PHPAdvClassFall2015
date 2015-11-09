@@ -1,3 +1,7 @@
+<?php
+require_once './autoload.php';
+?>
+
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
@@ -14,25 +18,55 @@ and open the template in the editor.
     </head>
     <body>
         <?php
+        
+        $util = new Util();
+        $errors = array();
+
+        if ($util->isPostRequest()) {
+            
+            $filename = filter_input(INPUT_POST, 'filename');
+
+            try {
+                $scarlet = new Remove();
+                $scarlet->removeFile($filename);
+                $message = 'File was deleted successfully.';
+            } catch (Exception $ex) {
+                $errors[] = $ex->getMessage();
+            }
+        }
+        
         $directory = scandir('./uploads');
         ?>
 
-        <table class="table"><thead><td> File Name </td><td>File Type</td><td>File Size</td></thead>
-                <?php foreach ($directory as $file) : ?>
-                    <?php if (!is_dir($file)) : ?>
-                        <?php
-                        echo '<tr><td><a href="./uploads/' . $file . '" target="_blank">' . basename($file) .'</a></td>';
-                        $img = getimagesize('./uploads/' . $file);
-                        echo '<td>' . $img['mime'] . '</td>';
-                        $size = filesize('./uploads/' . $file);
-                        echo '<td>' . $size . '</td>';
-                        echo '<td> <button class="btn">Delete</button> </td></tr>'
-                        ?>                      
-                    <?php endif; ?>
-                <?php endforeach; ?>
         
-        </table>
+            <table class="table"><thead><td> File Name </td><td>File Type</td><td>File Size</td></thead>
+                    <?php foreach ($directory as $file) : ?>
+                        <?php if (!is_dir($file)) : ?>
+                            <?php 
+                            $img = getimagesize('./uploads/' . $file);
+                            $size = filesize('./uploads/' . $file);                            
+                            ?>
+                            <tr>
+                                <td><a href="./uploads/' . $file . '" target="_blank"> <?php echo basename($file);  ?> </a></td>
+                                <td> <?php echo $img['mime'] ?> </td>                          
+                                <td> <?php echo $size ?> </td>
+                                <td> 
+                                    <form action="#" method="POST">
+                                        <input class="btn" type="submit" value="Delete" />
+                                        <input type="hidden" value="<?php echo basename($file) ?>" name="filename"/>
+                                    </form>
+                                </td>
+                            </tr>
+
+                                                
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+
+            </table>
+
+        <?php include './templates/errors.html.php'; ?>
+        <?php include './templates/messages.html.php'; ?>
 
 
-</body>
+    </body>
 </html>
