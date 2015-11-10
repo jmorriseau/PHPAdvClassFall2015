@@ -63,7 +63,7 @@ class RestServer {
         }
     }
 
-    function getVerb($verb) {
+    function getVerb() {
         return $this->verb;
     }
 

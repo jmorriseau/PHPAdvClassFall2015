@@ -39,7 +39,8 @@ and open the template in the editor.
         ?>
 
         
-            <table class="table"><thead><td> File Name </td><td>File Type</td><td>File Size</td></thead>
+            <table class="table">
+                <thead><td> File Name </td><td>File Type</td><td>File Size</td></thead>
                     <?php foreach ($directory as $file) : ?>
                         <?php if (!is_dir($file)) : ?>
                             <?php 
