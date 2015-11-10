@@ -13,16 +13,6 @@
  */
 class FileUpload {
 
-//    function upload($keyName) {
-//        try {
-//
-//            echo 'File is uploaded successfully.';
-//        } catch (RuntimeException $e) {
-//
-//            echo $e->getMessage();
-//        }
-//    }
-
     private function isValidParams($keyName) {
         if (!isset($_FILES[$keyName]['error']) || is_array($_FILES[$keyName]['error'])) {
             throw new RuntimeException('Invalid parameters.');
@@ -53,15 +43,16 @@ class FileUpload {
             // Check MIME Type by yourself.
             $finfo = new finfo(FILEINFO_MIME_TYPE);
             $validExts = array(
-                'jpg' => 'image/jpeg',
-                'png' => 'image/png',
-                'gif' => 'image/gif',
-                'pjpeg' => 'image/pjpeg',
                 'txt' => 'text/plain',
-                'htm' => 'text/html',
+                'html' => 'text/html',
                 'pdf' => 'application/pdf',
                 'doc' => 'application/msword',
-                'xls' => 'application/vnd.ms-excel'
+                'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                'xls' => 'application/vnd.ms-excel',
+                'xlsx' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                'jpg' => 'image/jpeg',
+                'png' => 'image/png',
+                'gif' => 'image/gif'
                 
             );
             $ext = array_search($finfo->file($_FILES[$keyName]['tmp_name']), $validExts, true);

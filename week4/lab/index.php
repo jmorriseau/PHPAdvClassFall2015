@@ -47,5 +47,7 @@ and open the template in the editor.
         ?>
         <?php include './templates/errors.html.php'; ?>
         <?php include './templates/messages.html.php'; ?>
+        <br />
+        <div><a href="./displayFiles.php">Display files</a></div>
     </body>
 </html>

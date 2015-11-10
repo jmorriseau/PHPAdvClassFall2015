@@ -43,12 +43,13 @@ and open the template in the editor.
                     <?php foreach ($directory as $file) : ?>
                         <?php if (!is_dir($file)) : ?>
                             <?php 
-                            $img = getimagesize('./uploads/' . $file);
+                            $finfo = new finfo(FILEINFO_MIME_TYPE);
                             $size = filesize('./uploads/' . $file);                            
                             ?>
                             <tr>
-                                <td><a href="./uploads/' . $file . '" target="_blank"> <?php echo basename($file);  ?> </a></td>
-                                <td> <?php echo $img['mime'] ?> </td>                          
+                                <td><a href="./uploads/<?php echo basename($file);  ?>" target="_blank"> <?php echo basename($file);  ?> </a></td>
+                                <?php $type = $finfo->file('./uploads/' . $file);?>
+                                <td> <?php echo $type ?> </td> 
                                 <td> <?php echo $size ?> </td>
                                 <td> 
                                     <form action="#" method="POST">
@@ -66,6 +67,8 @@ and open the template in the editor.
 
         <?php include './templates/errors.html.php'; ?>
         <?php include './templates/messages.html.php'; ?>
+        <br />
+        <div><a href="./index.php">Add files</a></div>
 
 
     </body>
