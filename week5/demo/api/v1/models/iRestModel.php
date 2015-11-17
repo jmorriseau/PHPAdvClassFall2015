@@ -18,9 +18,9 @@ interface iRestModel {
     
     function post($data);
     
-    function put($id);
-    
-    function delete($id);
+//    function put($data, $id);
+//    
+//    function delete($id);
     
     
     
