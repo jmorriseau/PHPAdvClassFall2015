@@ -3,6 +3,7 @@
 <div class="content">
     
     <h3>Search</h3>
+    <input ng-model="searchText">
     <!-- https://docs.angularjs.org/api/ng/filter/filter -->
     <br />
     <br /> 
@@ -16,7 +17,7 @@
             </tr>
         </thead>    
         
-        <tr ng-repeat="corporation in corporations">
+        <tr ng-repeat="corporation in corporations | filter:searchText">
             <td>{{corporation.corp}}</td>                  
             <td>{{corporation.owner}}</td>
             <td><a ng-href="#/corporation/{{corporation.id}}">View</a></td>
