@@ -1,66 +1,85 @@
 <?php
 
-include_once './autoload.php';
+include_once './bootstrap.php';
 
 $restServer = new RestServer();
 
 try {
+    
     $restServer->setStatus(200);
+    
     $resource = $restServer->getResource();
     $verb = $restServer->getVerb();
     $id = $restServer->getId();
-
-
-    if ('corporations' === $resource) {
-        $corps = new Corporations();
-        $results = null;
-
-        if ('GET' === $verb) {
-            if (is_null($id)) {
-                $results = $corps->getAll();
+    $serverData = $restServer->getServerData();
+    
+    
+     $config = array(
+        'DB_DNS' => 'mysql:host=localhost;port=3306;dbname=PHPAdvClassFall2015',
+        'DB_USER' => 'root',
+        'DB_PASSWORD' => ''
+    );
+    
+    $db = new PDO($config['DB_DNS'], $config['DB_USER'], $config['DB_PASSWORD']);
+    $db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+    
+    
+    
+    
+    if ( 'address' === $resource ) {
+        
+        $resourceData = new AddressResoruce();
+        
+        if ( 'GET' === $verb ) {
+            
+            if ( NULL === $id ) {
+                
+                $restServer->setData($resourceData->getAll());                           
+                
             } else {
-                $results = $corps->get($id);
-            }
+                
+                $restServer->setData($resourceData->get($id));
+                
+            }            
+            
         }
+                
+        if ( 'POST' === $verb ) {
+            
 
-        if ('DELETE' === $verb) {
-            if (is_null($id)) {
-                throw new InvalidArgumentException('missing ID');
+            if ($resourceData->post($serverData)) {
+                $restServer->setMessage('Address Added');
+                $restServer->setStatus(201);
             } else {
-                if ($corps->delete($id)) {
-                    $restServer->setMessage('Deleted successfully');
-                } else {
-                    throw new InvalidArgumentException('Delete unsuccessful for id ' . $id);
-                }
+                throw new Exception('Address could not be added');
             }
+        
         }
-
-        if ('PUT' === $verb) {
-            if (is_null($id)) {
-                throw new InvalidArgumentException('missing ID');
-            } else {
-                $results = $corps->put($id);
+        
+        
+        if ( 'PUT' === $verb ) {
+            
+            if ( NULL === $id ) {
+                throw new InvalidArgumentException('Address ID ' . $id . ' was not found');
             }
+            
         }
-
-        if ('POST' === $verb) {
-            if ($corps->post($restServer->getServerData())) {
-                $restServer->setMessage('Post successful');
-            } else {
-                throw new InvalidArgumentException('Post unsuccessful');
-            }
-        }
-
-
-        $restServer->setData($results);
+        
+    } else {
+        throw new InvalidArgumentException($resource . ' Resource Not Found');
+        //$response['errors'] = 'Resource Not Found';
+        //$status = 404;
     }
+   
+    
+    
 } catch (InvalidArgumentException $e) {
-    $restServer->setErrors($e->getMessage());
     $restServer->setStatus(400);
-} catch (Exception $e) {
-    $restServer->setErrors($e->getMessage());
+    $restServer->setErrors($ex->getMessage());
+} catch (Exception $ex) {    
     $restServer->setStatus(500);
+    $restServer->setErrors($ex->getMessage());   
 }
 
-$restServer->outputResponse();
 
+$restServer->outputReponse();

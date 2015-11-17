@@ -28,23 +28,19 @@
         <br />
         <br />
         Resource for endpoint:<br />
-        <input name="resource" value="address" />
+        <input name="resource" value="corporations" />
         <br />
         <br />
         Data(optional):<br />   
-        fullname <input type="text" name="fullname" value="" />
+        Corporation <input type="text" name="corp" value="" />
         <br />
-        email <input type="email" name="email" value="" />
+        Email <input type="email" name="email" value="" />
         <br />
-        addressline1 <input type="text" name="addressline1" value="" />
+        Owner <input type="text" name="owner" value="" />
         <br />
-        city <input type="text" name="city" value="" />
+        Phone <input type="text" name="phone" value="" />
         <br />
-        state <input type="text" name="state" list="states" placeholder="Find U.S. State">
-        <br />
-        zip <input type="number" pattern="[0-9]*" maxlength="5" min="0" name="zip">
-        <br />
-        birthday <input type="date" name="birthday">
+        Location <input type="text" name="location" value="" />
         <br />
         <br />
         <button>Make Call</button>
@@ -63,13 +59,11 @@
                 var verb = verbfield.options[verbfield.selectedIndex].value;
                 var resource = document.querySelector('input[name="resource"]').value;
                 var data = {
-                    'fullname' : document.querySelector('input[name="fullname"]').value,
+                    'corp' : document.querySelector('input[name="corp"]').value,
                     'email' : document.querySelector('input[name="email"]').value,
-                    'addressline1' : document.querySelector('input[name="addressline1"]').value,
-                    'city' : document.querySelector('input[name="city"]').value,
-                    'state' : document.querySelector('input[name="state"]').value,
-                    'zip' : document.querySelector('input[name="zip"]').value,
-                    'birthday' : document.querySelector('input[name="birthday"]').value
+                    'owner' : document.querySelector('input[name="owner"]').value,
+                    'phone' : document.querySelector('input[name="phone"]').value,
+                    'location' : document.querySelector('input[name="location"]').value
                 };            
                 var results = document.querySelector('textarea[name="results"]');
 
@@ -89,8 +83,7 @@
                     }
                 };
                 //var username = 'test';
-               // xmlhttp.setRequestHeader("Authorization", "Basic " + btoa(username + "
-               // "));
+               // xmlhttp.setRequestHeader("Authorization", "Basic " + btoa(username + ":"));
 
                  if ( verb === 'GET' ) {
                       xmlhttp.send(null);

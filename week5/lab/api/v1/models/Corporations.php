@@ -60,30 +60,34 @@ class Corporations implements iRestModel {
     }
 
     public function post($data) {
-        $results = false;
 
-        $stmt = $this->getDb()->prepare("INSET INTO corps WHERE corps = :corp, incorp_dt = :incorp_dt, email = :email, owner = :owner, phone = :phone");
+        $stmt = $this->getDb()->prepare("INSERT INTO corps SET corp = :corp, incorp_dt = :incorp_dt, email = :email, owner = :owner, phone = :phone, location = :location");
         $binds = array(
             ":corp" => $data['corp'],
             ":incorp_dt" => date("F j, Y, g:i a"),
             ":email" => $data['email'],
             ":owner" => $data['owner'],
             ":phone" => $data['phone'],
-            ":location" => 'Providence'
+            ":location" => $data['location']
         );
-
-        if ($stmt->execute($binds) && $stmt->rowCount() > 0) {
-            $results = true;
-        }
-        return $results;
+        
+       if ($stmt->execute($binds) && $stmt->rowCount() > 0) {
+            return true;
+        } 
+        return false;
     }
 
-    public function put($id) {
+    public function put($data, $id) {
         $results = array();
 
-        $stmt = $this->getDb()->prepare("SELECT * FROM corps WHERE id = :id");
+        $stmt = $this->getDb()->prepare("UPDATE corps SET corp = :corp, email = :email, owner = :owner, location = :location, phone = :phone WHERE id = :id");
         $binds = array(
-            ":id" => $id
+            ":id" => $id,
+            ":corp" => $data['corp'],
+            ":email" => $data['email'],
+            ":owner" => $data['owner'],
+            ":phone" => $data['phone'],
+            ":location" => $data['location']
         );
 
         if ($stmt->execute($binds) && $stmt->rowCount() > 0) {
