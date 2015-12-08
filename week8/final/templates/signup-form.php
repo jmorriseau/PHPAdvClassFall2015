@@ -1,7 +1,7 @@
 <!--default form-->
 <div class="form">  
-    <form action="#" method="post" name="login_form">   
-        <div id="login_popup" class="login_popup">
+    <form action="#" method="post" name="signup_form">   
+        <div id="signup_popup" class="login_popup">
             <div class="form_row">
                 <label>Email:</label>
                 <span class="input_container">
@@ -15,7 +15,7 @@
                 </span>
             </div>
             <div class="text_right">
-                <input type="submit" name="login" value="Submit" class="btn btn-primary" />
+                <input type="submit" name="signup" value="Submit" class="btn btn-primary" />
             </div>
         </div>
     </form>

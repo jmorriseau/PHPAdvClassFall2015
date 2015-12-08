@@ -10,6 +10,7 @@
     <?php
     $email = filter_input(INPUT_POST, 'email');
     $password = filter_input(INPUT_POST, 'password');
+    $loginField = filter_input(INPUT_POST, 'login');
 
 
     $util = new Util();
@@ -18,7 +19,7 @@
 
     $errors = array();
 
-    if ($util->isPostRequest()) {
+    if ($util->isPostRequest() && $loginField !== null) {
         if (!$validtor->emailIsValid($email)) {
             $errors[] = 'Email is not valid';
         }
@@ -41,6 +42,6 @@
     <?php include './templates/errors.html.php'; ?>
     <?php include './templates/messages.html.php'; ?>
     <?php include './templates/login-form.html.php'; ?>
-    
+
 </body>
 </html>

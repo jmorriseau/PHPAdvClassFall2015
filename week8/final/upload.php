@@ -195,6 +195,11 @@ try {
 
      */
 
+    
+   //add code to add to the db here
+
+//    addPhoto($fileName, $user_id);
+
     $message = 'File is uploaded successfully.';
 } catch (RuntimeException $e) {
 

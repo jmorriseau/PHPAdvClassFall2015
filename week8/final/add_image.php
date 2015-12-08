@@ -28,26 +28,26 @@ if (!isset($_SESSION['user_id'])) {
     <body>
         <h2>Upload an image</h2>
         <div class="view_table">
-        <p>
-            <a href="view.php">View Images</a>
-        </p>
-        <p>
-        <form>
-            <input type="text" placeholder="Meme Top text" name="memetop" value="" required="required" /> <br />
-            <input type="text" placeholder="Meme Botom text" name="memebottom" value="" required="required" /> 
-            <br />
-            <input type="reset" />
-            <input type="button" value="Submit" />
-        </form>
+            <p>
+                <a href="view.php">View Images</a>
+            </p>
+            <p>
+            <form>
+                <input type="text" placeholder="Meme Top text" name="memetop" value="" required="required" /> <br />
+                <input type="text" placeholder="Meme Botom text" name="memebottom" value="" required="required" /> 
+                <br />
+                <input type="reset" />
+                <input type="button" value="Submit" />
+            </form>
 
-    </p> 
-    <div id="files-img">
-        <p>Drag an image file from your computer here</p>
-        <p>or</p>
-        <p><input type="file" name="picked" /></p> 
-    </div>
-    <div class="progress"></div>
-    <pre id="img-file-content"></pre>
+        </p> 
+        <div id="files-img">
+            <p>Drag an image file from your computer here</p>
+            <p>or</p>
+            <p><input type="file" name="picked" /></p> 
+        </div>
+        <div class="progress"></div>
+        <pre id="img-file-content"></pre>
     </div>
     <script type="text/javascript">
         /*
@@ -71,7 +71,7 @@ if (!isset($_SESSION['user_id'])) {
          return false;
          }
          */
-    // call initialization file
+        // call initialization file
         if (window.File && window.FileList && window.FileReader) {
             document.addEventListener("DOMContentLoaded", Init);
         }
@@ -88,7 +88,7 @@ if (!isset($_SESSION['user_id'])) {
                 fileToUpload;
 
         function Init() {
-    // Event Listener for when the dragged file is over the drop zone.
+            // Event Listener for when the dragged file is over the drop zone.
             dropZoneImg.addEventListener('dragover', function (e) {
                 if (e.preventDefault)
                     e.preventDefault();
@@ -98,17 +98,17 @@ if (!isset($_SESSION['user_id'])) {
                 e.dataTransfer.dropEffect = 'copy';
             });
 
-    // Event Listener for when the dragged file enters the drop zone.
+            // Event Listener for when the dragged file enters the drop zone.
             dropZoneImg.addEventListener('dragenter', function (e) {
                 this.classList.add('over');
             });
 
-    // Event Listener for when the dragged file leaves the drop zone.
+            // Event Listener for when the dragged file leaves the drop zone.
             dropZoneImg.addEventListener('dragleave', function (e) {
                 this.classList.remove('over');
             });
 
-    // Event Listener for when the dragged file dropped in the drop zone.
+            // Event Listener for when the dragged file dropped in the drop zone.
             dropZoneImg.addEventListener('drop', function (e) {
                 if (e.preventDefault)
                     e.preventDefault();
@@ -158,7 +158,7 @@ if (!isset($_SESSION['user_id'])) {
 
         }
         ;
-    // Read the contents of a file.
+        // Read the contents of a file.
         function readTexImg(file) {
             var readerimg = new FileReader();
 
@@ -174,13 +174,7 @@ if (!isset($_SESSION['user_id'])) {
             };
 
             readerimg.readAsDataURL(file);
-
-
         }
-
-
-
-
 
         function uploadImage() {
             if (imageReady === true) {
@@ -224,7 +218,7 @@ if (!isset($_SESSION['user_id'])) {
 
 
                 } else {
-    // waiting for the call to complete
+                    // waiting for the call to complete
                 }
             };
 
@@ -236,12 +230,12 @@ if (!isset($_SESSION['user_id'])) {
                 uploadProgress.innerHTML = Math.ceil(e.loaded / e.total) * 100 + '%';
                 ;
             } else {
-    // Unable to compute progress information since the total size is unknown
+                // Unable to compute progress information since the total size is unknown
             }
         }
 
         function transferComplete(e) {
-    //uploadProgress.innerHTML = 'The transfer is complete.';
+            //uploadProgress.innerHTML = 'The transfer is complete.';
         }
 
 
