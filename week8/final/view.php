@@ -17,10 +17,10 @@ include './templates/login_signup.html.php';
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     </head>
     <body>
-        
+
         <?php include './templates/errors.html.php'; ?>
         <?php include './templates/messages.html.php'; ?>
-        
+
         <!--for facebook share-->
         <div id="fb-root"></div>
         <script>(function (d, s, id) {
@@ -33,33 +33,23 @@ include './templates/login_signup.html.php';
                 fjs.parentNode.insertBefore(js, fjs);
             }(document, 'script', 'facebook-jssdk'));
         </script>
-<?php
+        <?php
+        $logout = filter_input(INPUT_GET, 'logout');
 
-$logout = filter_input(INPUT_GET, 'logout');
+        if ($logout == 1) {
+            $_SESSION['user_id'] = null;
+        }
 
-if ($logout == 1) {
-    $_SESSION['user_id'] = null;
-}
-
-if (!isset($_SESSION['user_id'])) {
-        echo'<div id="header_right">';
-        echo '<input type="button" value="Log in" id="login" />';
-        echo '<input type="button" value="Sign up" id="sign_up" />';
-        echo '</div>';
-} else if (isset($_SESSION['user_id'])) {
-    echo '<div class="logout"><a href="?logout=1">Logout</a></div>';
-}
-?>
-        <!--log in and sign up buttons-->
-<!--        <div id="header_right">
-            <input type="button" value="Log in" id="login" />
-            <input type="button" value="Sign up" id="sign_up" />
-        </div>-->
-        <!--end log in and sign up-->
-
-        <!-- not needed but he had one on his-->
-<!--        <p><a href=".">Home</a></p>-->
-
+        if (!isset($_SESSION['user_id'])) {
+            echo'<div id="header_right">';
+            echo '<input type="button" value="Log in" id="login" />';
+            echo '<input type="button" value="Sign up" id="sign_up" />';
+            echo '</div>';
+        } else if (isset($_SESSION['user_id'])) {
+            echo '<div class="logout button"><a href="?logout=1">Logout</a></div>';
+            echo '<div class="action_btn button"><a href="add_image.php">Upload Image</a></div>';
+        }
+        ?>
         <?php
         $files = array();
         $directory = '.' . DIRECTORY_SEPARATOR . 'uploads';
@@ -72,27 +62,69 @@ if (!isset($_SESSION['user_id'])) {
 
         //sort the files by latest upload first
         krsort($files);
-        //ksort($files);
         ?>
-        <!--        display each file -->
-        <div class="view_table">
-            <?php
-            foreach ($files as $key => $path):
-                ?> 
-                <div class="meme"> 
-                    <img src="<?php echo $path; ?>" /> <br />
-                    <?php echo date("l F j, Y, g:i a", $key); ?>
-                    <!-- Place this tag where you want the share button to render. -->
-                    <div class="g-plus" data-action="share" data-href="<?php echo $path; ?>"></div> 
-                    <div class="mail"><a href='mailto:?subject=I wanted you to see this image&amp;body=Check out this site" . <?php echo $path; ?> "'
-                                         title="Share by Email">
-                            <img src="http://png-2.findicons.com/files/icons/573/must_have/48/mail.png">
-                        </a></div>
-                    <div class="fb-share-button" data-href="<?php echo $path; ?>" data-layout="button_count"></div>
-                </div>
 
-            <?php endforeach; ?>
-        </div>
+        <?php
+        if (!isset($_SESSION['user_id'])) {
+            echo '<div class="view_table">';
+
+            foreach ($files as $key => $path) {
+                echo '<div class=meme>';
+
+                echo '<img src="' . $path . '" /> <br />';
+                echo date("l F j, Y, g:i a", $key);
+                echo '<div class="g-plus" data-action="share" data-href="' . $path . '"></div>';
+                echo '<div class="mail"> <a href="mailto:?subject=I wanted you to see this image&amp;body=Check out this site"' . $path . '"title="Share by Email">
+                            <img src="http://png-2.findicons.com/files/icons/573/must_have/48/mail.png">
+                        </a>
+                    </div>';
+                echo '<div class="fb-share-button" data-href="' . $path . '" data-layout="button_count"></div>';
+                echo '</div>';
+            }
+
+            echo '</div>';
+        } else if (isset($_SESSION['user_id'])) {
+            $util = new Util();
+
+            if ($util->isPostRequest()) {
+
+                $filename = filter_input(INPUT_POST, 'filename');
+
+                $removeFromFolder = new Remove();
+                $removeFromFolder->removeFile($filename);
+                $removeFromDB = new Login();
+                $removeFromDB->removeUserPhotos($filename);
+            }
+
+            $results = new Login();
+            $userPhotos = array();
+
+            $userPhotos = $results->getUserPhotos($_SESSION['user_id']);
+            if ($userPhotos) {
+                echo '<div class="view_table">';
+                
+                foreach ($userPhotos as $uPhoto) {
+                    echo '<div class="meme">';
+                    //echo '<p>User ID ' . $stuff['user_id'] . '<br />';
+                    //echo 'Photo ID ' . $stuff['photo_id'] . '<br />';
+                    echo '<img src="' . $directory . '\\' . $uPhoto['filename'] . '."/> <br />';
+                    echo '<div class="g-plus" data-action="share" data-href="' . $directory . '\\' . $uPhoto['filename'] . '"></div>';
+                    echo '<div class="mail"> <a href="mailto:?subject=I wanted you to see this image&amp;body=Check out this site"' . $directory . '\\' . $uPhoto['filename'] . 'title="Share by Email">'
+                    . '<img src="http://png-2.findicons.com/files/icons/573/must_have/48/mail.png"> </a> </div>';
+                    echo '<div class="fb-share-button" data-href="' . $directory . '\\' . $uPhoto['filename'] . '" data-layout="button_count"></div><br /><br />';
+                    echo '<form action="#" method="POST">
+                        <input class="btn" type="submit" value="Delete" />
+                        <input type="hidden" value="' . $uPhoto['filename'] . '" name="filename"/>
+                      </form>';
+                    echo '</div>';
+                }
+                
+                echo '</div>';
+            }
+        }
+        ?>
+
+
 
         <!-- Place this tag in your head or just before your close body tag. -->
         <script src="https://apis.google.com/js/platform.js" async defer></script>

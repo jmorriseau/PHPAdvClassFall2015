@@ -1,11 +1,15 @@
 <?php
 
+//session_start();
+require_once './autoload.php';
 header("Access-Control-Allow-Orgin: *");
 header("Content-Type: application/json; charset=utf8");
 
 $status_codes = array(
     200 => 'OK',
     500 => 'Internal Server Error',
+    
+
 );
 
 $status = 200;
@@ -199,8 +203,21 @@ try {
    //add code to add to the db here
 
 //    addPhoto($fileName, $user_id);
+    
 
-    $message = 'File is uploaded successfully.';
+if (isset($_SESSION['user_id'])) {
+        
+       
+       $fileName.= '.' . $ext;
+       $signupAddphoto = new Signup();
+       $current_user = $_SESSION['user_id'];
+       $signupAddphoto->addPhoto($current_user, $fileName);
+
+
+    $message = 'File is uploaded successfully. ' . $current_user . " " . $fileName;
+    
+}
+
 } catch (RuntimeException $e) {
 
     $message = $e->getMessage();

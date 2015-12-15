@@ -49,6 +49,38 @@ class Login {
             }
         }
     }
+    
+    public function getUserPhotos($user_id) {
+
+        $results = array();
+
+        $stmt = $this->getDb()->prepare("SELECT * FROM photos WHERE user_id = :user_id");
+        $binds = array(
+            ":user_id" => $user_id
+        );
+
+        if ($stmt->execute($binds) && $stmt->rowCount() > 0) {
+            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+//            if (password_verify($password, $results['password'])) {
+                return $results;
+                
+//            }
+        }
+    }
+    
+    public function removeUserPhotos($filename) {
+
+        $stmt = $this->getDb()->prepare("DELETE FROM photos WHERE filename = :filename");
+        $binds = array(
+            ":filename" => $filename
+        );
+
+        if ($stmt->execute($binds) && $stmt->rowCount() > 0) {
+           return true;
+        }
+        return false;
+        
+    }
 
 
 }

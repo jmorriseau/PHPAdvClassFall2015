@@ -11,6 +11,7 @@ if (!isset($_SESSION['user_id'])) {
     header('Location: view.php');
 } else if (isset($_SESSION['user_id'])) {
     echo '<div class="logout"><a href="?logout=1">Logout</a></div>';
+    echo '<div class="action_btn"><a href="view.php">View Images</a></div>';
 }
 ?>
 <!DOCTYPE html>
@@ -27,11 +28,7 @@ if (!isset($_SESSION['user_id'])) {
     </head>
     <body>
         <h2>Upload an image</h2>
-        <div class="view_table">
-            <p>
-                <a href="view.php">View Images</a>
-            </p>
-            <p>
+        <div class="view_table">           
             <form>
                 <input type="text" placeholder="Meme Top text" name="memetop" value="" required="required" /> <br />
                 <input type="text" placeholder="Meme Botom text" name="memebottom" value="" required="required" /> 

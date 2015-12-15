@@ -58,4 +58,18 @@ class Signup {
         return false;
         
     }
+    
+    public function addPhoto($user_id, $fileName) {
+        $stmt = $this->getDb()->prepare("INSERT INTO photos set user_id = :user_id, filename = :filename, created = now()");
+        
+        $binds = array(
+            ":user_id" => $user_id,
+            ":filename" => $fileName
+        );
+        
+        if ($stmt->execute($binds) && $stmt->rowCount() > 0) {
+           return true;
+        }
+        return false;
+    }
 }

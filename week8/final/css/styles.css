@@ -45,7 +45,7 @@ h2{
     width:100%;
     text-align:right;
 }
-.login_popup input[name=login_btn], #header_right #login, #header_right #sign_up, .logout {
+.login_popup input[name=login_btn], #header_right #login, #header_right #sign_up, .logout, .action_btn {
     background-color:#336699;
     color:#FFF;
     border-radius:4px;
@@ -88,17 +88,17 @@ div.row span.product-reference input[type=text] {
 /*meme styles*/
 /*figure out how you want to style the table view of the images */
 .view_table {
-    border:5px solid purple;
     padding:100px;
 
 }
 .meme {
-    width: 330px; 
+    width: 320px; 
     border: 1px solid silver;
     padding: 0.5em;
     text-align: center;
     margin: 0.5em;
     vertical-align: middle;
+    float:left;
 }
 
 /*add image styles*/
@@ -122,10 +122,10 @@ div.row span.product-reference input[type=text] {
     max-width: 100%;
 }
 /*logout button*/
-.logout {
+.logout, .action_btn {
     float:right;
     margin-right:10px;
 }
-.logout a{
+.logout a, .action_btn a{
     color:#fff;
 }
